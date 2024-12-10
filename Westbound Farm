@@ -1,3 +1,4 @@
+wait(3)
 -- GODMODE Westbound v2
 -- This godmode was designed to specifically allow for robbing.
 -- It WILL break your character actions unless they are ran through a script
