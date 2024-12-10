@@ -1,0 +1,142 @@
+-- GODMODE Westbound v2
+-- This godmode was designed to specifically allow for robbing.
+-- It WILL break your character actions unless they are ran through a script
+-- Rejoin to fix it!
+game.StarterGui:SetCore("SendNotification", {
+Title = "Godmode"; -- the title 
+Text = "Starting farm"; -- what the text says 
+Duration = 5; -- how long the notification should in secounds
+})
+speaker = game.Players.LocalPlayer
+local Cam = workspace.CurrentCamera
+	local Pos, Char = Cam.CFrame, speaker.Character
+	local Human = Char and Char.FindFirstChildWhichIsA(Char, "Humanoid")
+	local nHuman = Human.Clone(Human)
+	nHuman.Parent, speaker.Character = Char, nil
+	nHuman.SetStateEnabled(nHuman, 15, false)
+	nHuman.SetStateEnabled(nHuman, 1, false)
+	nHuman.SetStateEnabled(nHuman, 0, false)
+	nHuman.BreakJointsOnDeath, Human = true, Human.Destroy(Human)
+	speaker.Character, Cam.CameraSubject, Cam.CFrame = Char, nHuman, wait() and Pos
+	nHuman.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+	local Script = Char.FindFirstChild(Char, "Animate")
+	if Script then
+		Script.Disabled = true
+		wait()
+		Script.Disabled = false
+	end
+	nHuman.Health = nHuman.MaxHealth
+
+    wait(5)
+    --Autofarm! (RUN GODMODE BEFORE THIS)
+-- // Services
+local Workspace = game:GetService('Workspace')
+local ReplicatedStorage = game:GetService('ReplicatedStorage')
+local Players = game:GetService('Players')
+local RunService = game:GetService('RunService')
+
+-- // Player
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character
+local HumanoidRootPart = Character.HumanoidRootPart
+local States = LocalPlayer:FindFirstChild('States')
+local Stats = LocalPlayer:FindFirstChild('Stats')
+
+-- // Remotes
+local GeneralEvents = ReplicatedStorage:FindFirstChild('GeneralEvents')
+local RobRemote = GeneralEvents:FindFirstChild('Rob')
+local ChangeCharacter = Character:FindFirstChild('ChangeCharacter')
+local LassoEvent = GeneralEvents:FindFirstChild('LassoEvents')
+
+-- // Paths
+local ChestFolder = Workspace:FindFirstChild('ChestFolder')
+local Lassod = States:FindFirstChild('Lassod')
+local Hogtied = States:FindFirstChild('Hogtied')
+local BagLevel = Stats:FindFirstChild('BagSizeLevel'):FindFirstChild('CurrentAmount')
+local BagAmount = States:FindFirstChild('Bag')
+
+-- // Locations
+local Camp = CFrame.new(1636.62537, 104.349976, -1736.184)
+
+-- // Status
+local CashRegisterFinished = false
+local BankFinished = false
+
+-- // Functions
+local function TeleportToCamp()
+    HumanoidRootPart.CFrame = Camp
+end
+
+local function Godmode()
+end
+
+local function AntiAFK()
+end
+
+local function HideName()
+end
+
+local function CashRegisterFarm()
+    for _, Item in next, Workspace:GetChildren() do
+        if BagAmount.Value == BagLevel.Value then 
+            TeleportToCamp()
+            CashRegisterFinished = true
+            break
+        elseif Item:IsA('Model') and Item.Name == 'CashRegister' then
+            HumanoidRootPart.CFrame = Item:FindFirstChild('Open').CFrame
+            RobRemote:FireServer('Register', {['Part'] = Item:FindFirstChild('Union'), ['OpenPart'] = Item:FindFirstChild('Open'), ['ActiveValue'] = Item:FindFirstChild('Active'), ['Active'] = true})
+        end
+    end    
+    CashRegisterFinished = true
+end
+
+local function BankFarm()
+    for _, Item in next, Workspace:GetChildren() do
+        if BagAmount.Value == BagLevel.Value then 
+            TeleportToCamp()
+            BankFinished = true
+            break
+        elseif Item:IsA('Model') and Item.Name == 'Safe' and Item:FindFirstChild('Amount').Value > 0 then
+            if Item:FindFirstChild('Open').Value == true then
+                HumanoidRootPart.CFrame = Item:FindFirstChild('Safe').CFrame
+                RobRemote:FireServer('Safe', Item)
+            elseif Item:FindFirstChild('Open').Value == false then
+                HumanoidRootPart.CFrame = Item:FindFirstChild('Safe').CFrame
+                Item:FindFirstChild('OpenSafe'):FireServer('Completed')
+                RobRemote:FireServer('Safe', Item)
+            end
+        end
+    end
+    BankFinished = true
+end
+
+-- // Main
+Godmode()
+HideName()
+AntiAFK()
+RunService.RenderStepped:Connect(function()
+    coroutine.wrap(BankFarm)()
+    coroutine.wrap(CashRegisterFarm)()
+    repeat task.wait() until CashRegisterFinished == true and BankFarmFinished == true
+end)
+
+wait(1)
+wait(0.5)local ba=Instance.new("ScreenGui")
+local ca=Instance.new("TextLabel")local da=Instance.new("Frame")
+local _b=Instance.new("TextLabel")local ab=Instance.new("TextLabel")ba.Parent=game.CoreGui
+ba.ZIndexBehavior=Enum.ZIndexBehavior.Sibling;ca.Parent=ba;ca.Active=true
+ca.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)ca.Draggable=true
+ca.Position=UDim2.new(0.698610067,0,0.098096624,0)ca.Size=UDim2.new(0,370,0,52)
+ca.Font=Enum.Font.SourceSansSemibold;ca.Text="Anti AFK Script"ca.TextColor3=Color3.new(0,1,1)
+ca.TextSize=22;da.Parent=ca
+da.BackgroundColor3=Color3.new(0.196078,0.196078,0.196078)da.Position=UDim2.new(0,0,1.0192306,0)
+da.Size=UDim2.new(0,370,0,107)_b.Parent=da
+_b.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)_b.Position=UDim2.new(0,0,0.800455689,0)
+_b.Size=UDim2.new(0,370,0,21)_b.Font=Enum.Font.Arial;_b.Text="Made by Dynamic. (please subscribe)"
+_b.TextColor3=Color3.new(0,1,1)_b.TextSize=20;ab.Parent=da
+ab.BackgroundColor3=Color3.new(0.176471,0.176471,0.176471)ab.Position=UDim2.new(0,0,0.158377,0)
+ab.Size=UDim2.new(0,370,0,44)ab.Font=Enum.Font.ArialBold;ab.Text="Status: Active"
+ab.TextColor3=Color3.new(0,1,1)ab.TextSize=20;local bb=game:service'VirtualUser'
+game:service'Players'.LocalPlayer.Idled:connect(function()
+bb:CaptureController()bb:ClickButton2(Vector2.new())
+ab.Text="Roblox Tried to kick you but we didnt let them kick you :D"wait(2)ab.Text="Status : Active"end)
