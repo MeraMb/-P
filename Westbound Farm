@@ -1,8 +1,11 @@
-wait(3)
--- GODMODE Westbound v2
--- This godmode was designed to specifically allow for robbing.
--- It WILL break your character actions unless they are ran through a script
--- Rejoin to fix it!
+wait(1)
+local Players = game:GetService("Players")
+local Teams = game:GetService("Teams")
+
+local player = Players.LocalPlayer
+player.Team = Teams.Outlaws
+
+wait(2)
 game.StarterGui:SetCore("SendNotification", {
 Title = "Godmode"; -- the title 
 Text = "Starting farm"; -- what the text says 
