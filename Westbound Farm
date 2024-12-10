@@ -1,4 +1,4 @@
-wait(1)
+wait(5)
 local Players = game:GetService("Players")
 local Teams = game:GetService("Teams")
 
