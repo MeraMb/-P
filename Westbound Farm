@@ -32,7 +32,7 @@ local Cam = workspace.CurrentCamera
 	nHuman.Health = nHuman.MaxHealth
 
     wait(5)
-    --Autofarm! (RUN GODMODE BEFORE THIS)
+--Autofarm! (RUN GODMODE BEFORE THIS)
 -- // Services
 local Workspace = game:GetService('Workspace')
 local ReplicatedStorage = game:GetService('ReplicatedStorage')
@@ -60,7 +60,7 @@ local BagLevel = Stats:FindFirstChild('BagSizeLevel'):FindFirstChild('CurrentAmo
 local BagAmount = States:FindFirstChild('Bag')
 
 -- // Locations
-local Camp = CFrame.new(1476.7254638671875, 132.849609375, 1662.251708984375)
+local Camp = CFrame.new(1630.6607666015625, 107.9439697265625, -1824.154541015625)
 
 -- // Status
 local CashRegisterFinished = false
@@ -78,20 +78,6 @@ local function AntiAFK()
 end
 
 local function HideName()
-end
-
-local function CashRegisterFarm()
-    for _, Item in next, Workspace:GetChildren() do
-        if BagAmount.Value == BagLevel.Value then 
-            TeleportToCamp()
-            CashRegisterFinished = true
-            break
-        elseif Item:IsA('Model') and Item.Name == 'CashRegister' then
-            HumanoidRootPart.CFrame = Item:FindFirstChild('Open').CFrame
-            RobRemote:FireServer('Register', {['Part'] = Item:FindFirstChild('Union'), ['OpenPart'] = Item:FindFirstChild('Open'), ['ActiveValue'] = Item:FindFirstChild('Active'), ['Active'] = true})
-        end
-    end    
-    CashRegisterFinished = true
 end
 
 local function BankFarm()
@@ -112,6 +98,20 @@ local function BankFarm()
         end
     end
     BankFinished = true
+end
+
+local function CashRegisterFarm()
+    for _, Item in next, Workspace:GetChildren() do
+        if BagAmount.Value == BagLevel.Value then 
+            TeleportToCamp()
+            CashRegisterFinished = true
+            break
+        elseif Item:IsA('Model') and Item.Name == 'CashRegister' then
+            HumanoidRootPart.CFrame = Item:FindFirstChild('Open').CFrame
+            RobRemote:FireServer('Register', {['Part'] = Item:FindFirstChild('Union'), ['OpenPart'] = Item:FindFirstChild('Open'), ['ActiveValue'] = Item:FindFirstChild('Active'), ['Active'] = true})
+        end
+    end    
+    CashRegisterFinished = true
 end
 
 -- // Main
