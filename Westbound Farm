@@ -60,7 +60,7 @@ local BagLevel = Stats:FindFirstChild('BagSizeLevel'):FindFirstChild('CurrentAmo
 local BagAmount = States:FindFirstChild('Bag')
 
 -- // Locations
-local Camp = CFrame.new(1636.62537, 104.349976, -1736.184)
+local Camp = CFrame.new(1476.7254638671875, 132.849609375, 1662.251708984375)
 
 -- // Status
 local CashRegisterFinished = false
