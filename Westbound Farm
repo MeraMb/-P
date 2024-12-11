@@ -3,7 +3,16 @@ local Players = game:GetService("Players")
 local Teams = game:GetService("Teams")
 
 local player = Players.LocalPlayer
+
+-- Forzar reinicio del personaje
+player:LoadCharacter()
+
+-- Esperar a que el personaje se cargue completamente
+player.CharacterAdded:Wait()
+
+-- Cambiar el equipo del jugador
 player.Team = Teams.Outlaws
+
 
 wait(2)
 game.StarterGui:SetCore("SendNotification", {
